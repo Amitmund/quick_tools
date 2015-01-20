@@ -6,3 +6,11 @@ Ans:	a) Install git
 	c) cd into that directory
 	d) type: git init
 	e) git pull https://github.com/Amitmund/quick_tools
+
+
+### For owner ###
+Steps: if you want to add or edit things at this repo. [ example: adding Updating README file ]
+a. vi README [ update your content.]
+b. git add README
+c. git commit -m “Updating README file"
+d. git push -u origin master
