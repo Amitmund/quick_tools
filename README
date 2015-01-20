@@ -1,0 +1,8 @@
+README:
+
+*) How to pull files from this repository?
+Ans:	a) Install git
+	b) create a directory where you want to pull these files.
+	c) cd into that directory
+	d) type: git init
+	e) git pull https://github.com/Amitmund/quick_tools
