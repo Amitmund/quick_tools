@@ -1,0 +1,10 @@
+Example:
+########
+#usage: command <decimal numbers...>
+# you can provide more then 1 decimal number.
+
+./decimal_to_bin 10 15 300
+Decimal => Binary
+10 => 1010
+15 => 1111
+300 => 100101100
