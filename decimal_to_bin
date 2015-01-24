@@ -1,8 +1,0 @@
-#!/usr/bin/perl
-#usage: command <decimal agrs ...>
-
-print "Decimal => Binary\n";
-foreach my $arg (@ARGV){
-$num1 = sprintf("%b",$arg);
-print "$arg => $num1\n";
-}
