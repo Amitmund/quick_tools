@@ -1,0 +1,35 @@
+# save as .screenrc at your home directory.
+# 
+
+# Don't show start up message.
+startup_message off
+
+# auto detach on exit
+autodetach on     # auto detach on exit
+
+# change ctrl-a to ctrl-x  [ If you don't have this line then the default option is ctrl-a also type as C-a ]
+escape ^Xx
+
+# allow scrolling   [ Note: use * after xterm so that you can get scrolling for all the different screen ]
+termcapinfo xterm* ti@:te@
+
+# default: 100 # Set default lines of scrollback.
+defscrollback 9000
+# To scrollback "ctrl+x ESC"
+
+# case insensitive search in scroll-back mode
+ignorecase on
+
+# keep the buffer exchange file out of /tmp
+bufferfile $HOME/.screen-exchange
+
+# My status line
+caption always "Screens: %{.bW}%-w%{.rW}%f%n %t%{-}%+w %=%{..G}  %{W}%Y-%m-%d %{W}%c %{g} %H"
+
+sorendition "kg"        # makes screen messages stand out, black on green
+altscreen on            # full-screen programs (less, Vim) should be cleared once quit
+vbell off               # visual bells are hard to do right. screen's isn't good
+defutf8 on              # allow utf characters
+
+hardstatus alwayslastline
+hardstatus string '%{= kw}[ %{= kb}%H%{= kw} ][%= %{= kw}%?%-Lw%?%{= kW}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ][ %{r}%l%{w} ]%{w}[%{r} %d/%m/%y %C %A %{w}]%{w}'
