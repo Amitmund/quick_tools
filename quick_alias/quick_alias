@@ -3,4 +3,4 @@ alias grep='grep --color'
 alias ls='ls -FG'
 alias lssize='ls -FGhlrS'
 #F:Display/, G:color, h:K/M, S:size, m: oneline, L:follow symlink
-
+alias githubpush='git push -u origin master'
