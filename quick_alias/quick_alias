@@ -6,4 +6,4 @@ alias lssize='ls -FGhlrS'
 alias githubpush='git push -u origin master'
 
 #Adding localpath
-export PATH=$PATH:../decimal_to_binary:../grep-ip:../hostname_to_ip
+export PATH=$PATH:..:.:../decimal_to_binary:../grep-ip:../hostname_to_ip
