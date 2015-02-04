@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+ 
+#Usage script <username> <hostname>
+ 
+set timeout 60
+ 
+
+#spawn ssh <username>@<hostname>
+spawn ssh [lindex $argv 0]@[lindex $argv 1]
+
+expect "$ " {send "hostname\r"}
+expect "$ " {send "uptime\r"}
+expect "$ " {send "touch /var/tmp/expect_test1.txt\r"}
+expect "$ " {send "echo \"Hi expect file\" >> /var/tmp/expect_test1.txt\r"}
+expect "$ " {send "cat /var/tmp/expect_test1.txt\r"}
+expect "$ " {send "exit\r"}
