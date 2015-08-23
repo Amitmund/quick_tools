@@ -1,0 +1,44 @@
+#!/bin/bash
+
+TYPE=$1
+
+
+mesos_server(){
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+CODENAME=$(lsb_release -cs)
+echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+sudo apt-get -y update
+sudo apt-get install -y mesosphere
+}
+
+mesos_client(){
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
+DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+CODENAME=$(lsb_release -cs)
+echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" | sudo tee /etc/apt/sources.list.d/mesosphere.list
+sudo apt-get -y update
+sudo apt-get install -y mesos
+}
+
+
+if [ $# -ne 1 ]
+	then
+		echo "Please provide one argument \"server\" or \"client\""
+		exit 100
+	else
+		echo "I am in else."
+fi
+
+
+case "${TYPE}" in
+
+	server)
+		mesos_server
+		;;
+	client)
+		mesos_client
+		;;
+	*)
+		echo "Please provide argument \"server\" or \"client\""
+esac
