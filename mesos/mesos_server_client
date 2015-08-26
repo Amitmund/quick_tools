@@ -27,18 +27,18 @@ if [ $# -ne 1 ]
 		echo "Please provide one argument \"server\" or \"client\""
 		exit 100
 	else
-		echo "I am in else."
+		case "${TYPE}" in
+	
+		server)
+			mesos_server
+			;;
+		client)
+			mesos_client
+			;;
+		*)
+			echo "Please provide argument \"server\" or \"client\""
+		esac
 fi
 
 
-case "${TYPE}" in
 
-	server)
-		mesos_server
-		;;
-	client)
-		mesos_client
-		;;
-	*)
-		echo "Please provide argument \"server\" or \"client\""
-esac
