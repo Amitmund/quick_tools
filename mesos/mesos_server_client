@@ -36,7 +36,7 @@ if [ $# -ne 1 ]
 			mesos_client
 			;;
 		*)
-			echo "Please provide argument \"server\" or \"client\""
+			echo "Please provide one argument \"server\" or \"client\""
 		esac
 fi
 
