@@ -1,3 +1,5 @@
+## NOTES ##
+
  perl one-liner
 1. Decimal to binary:
 perl -wl -e '$num1 = sprintf("%b",15), print $num1;'
