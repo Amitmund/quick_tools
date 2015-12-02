@@ -80,7 +80,30 @@ FL=`cat -n access.log | grep -m1 "30/Nov/2015:00:00" | awk '{print $1}'`
 LL=`cat -n access.log | grep -m1 "02/Dec/2015:16:55" | awk '{print $1}'`
 sed -n "${FL},${LL}p" access.log
 
-
 [or]
 
 sed -n `cat -n access.log | grep -m1 "30/Nov/2015:00:00" | awk '{print $1}'`,`cat -n access.log | grep -m1 "02/Dec/2015:16:55" | awk '{print $1}'`p access.log
+
+
+### printing a particular line: ###
+sed -n 128p filename
+
+### Getting files bigger then 50M from / mount point[partition] only ###
+
+find /  -mount -size +50M -exec du -ksh {} \;
+
+
+### BASH Internal Variables: ###
+
+http://tldp.org/LDP/abs/html/internalvariables.html
+
+$$ = current pid
+!$ = last command issued
+$? = error code of last command
+$0 = command
+$1 = argument #1, also $2,$3,$4, etc.
+@ = full command line
+$_ = current shell
+
+
+
