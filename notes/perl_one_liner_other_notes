@@ -67,9 +67,20 @@ perl -MMath::BigInt -le 'print Math::BigInt->new(6)->bfac()'
 
 12. print a..z:
 
-
-
 perl -le 'print join ",", ("a".."z");'
 
 13. print 1..1000:
 perl -le 'print join ",", ("1".."1000");' 
+
+
+### Get the line range ###
+
+#!/bin/bash
+FL=`cat -n access.log | grep -m1 "30/Nov/2015:00:00" | awk '{print $1}'`
+LL=`cat -n access.log | grep -m1 "02/Dec/2015:16:55" | awk '{print $1}'`
+sed -n "${FL},${LL}p" access.log
+
+
+[or]
+
+sed -n `cat -n access.log | grep -m1 "30/Nov/2015:00:00" | awk '{print $1}'`,`cat -n access.log | grep -m1 "02/Dec/2015:16:55" | awk '{print $1}'`p access.log
