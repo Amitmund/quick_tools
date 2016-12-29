@@ -3,6 +3,9 @@
 import subprocess
 import sys
 
+# Example on how to use this code:
+# ./tellWordsWithArgs.py I like to eat apple
+
 command = "say"
 
 text = sys.argv[1:]
