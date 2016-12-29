@@ -1,11 +1,13 @@
+Github
+
 README:
 
 *) How to pull files from this repository?
-Ans:	a) Install git
-	b) create a directory where you want to pull these files.
-	c) cd into that directory
-	d) type: git init
-	e) git pull https://github.com/Amitmund/quick_tools
+Ans: a) Install git
+    b) create a directory where you want to pull these files.
+    c) cd into that directory
+    d) type: git init
+    e) git pull https://github.com/Amitmund/quick_tools
 
 # Example: 
 mkdir -p ~/github/amitmund/quick_tools
@@ -21,5 +23,29 @@ Steps: if you want to add or edit things at this repo. [ example: adding Updatin
 a. vi README [ update your content.]
 b. git add README
 c. git commit -m “Updating README file"
-d. git push -u origin master
+d. git remote add origin https://github.com/Amitmund/quick_tools
+e. git push -u origin master
+
+# It will ask your username and password please provide the same.
+
+
+# Few more Note:
+
+$HOME/.gitconfig is your global config for git.
+There are three levels of config files.
+
+ cat $(git rev-parse --show-toplevel)/.git/config
+(mentioned by bereal) is your local config, local to the repo you have cloned.
+
+you can also type from within your repo:
+
+git remote -v
+And see if there is any remote named 'origin' listed in it.
+
+If not, if that remote (which is created by default when cloning a repo) is missing, you can add it again:
+
+git remote add origin url/to/your/fork
+
+Original Link: http://stackoverflow.com/questions/15637507/fatal-origin-does-not-appear-to-be-a-git-repository
+
 
