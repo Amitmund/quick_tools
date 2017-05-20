@@ -6,9 +6,13 @@ change ctrl-a to ctrl-x
 Also, I have to provide "configuration" file instead of .screenrc and the filename I am using as screenrc
 
 #so to start my screen session:
-screen -S amundScreen -c screenrc
+screen -m -S amundScreen -c screenrc 
 # in the above command, I am giving a name "amundScreen" to this session along with the screen configuration file.
 # so, if you detach, and do "screen -ls", you will see the name some thing like: "<pid>.amundScreen"
+# -m: For multi-user to share the screen session
+
+# To connect to that multi-user screen session:
+screen -x <pid>.amundScreen
 
 Few inside screen commands:
 c = ctrl
@@ -27,7 +31,7 @@ c-x <shift>-a: rename the current screen tab
 ########
 Few external links:
 http://aperiodic.net/screen/quick_reference
-
+http://wiki.networksecuritytoolkit.org/index.php/HowTo_Share_A_Terminal_Session_Using_Screen
 
 #######
 # screen --help
