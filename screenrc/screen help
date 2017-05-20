@@ -24,7 +24,9 @@ c-x <shift>-a: rename the current screen tab
 -S sockname   Name this session <pid>.sockname instead of <pid>.<tty>.<host>.
 -x            Attach to a not detached screen. (Multi display mode).
 
-
+########
+Few external links:
+http://aperiodic.net/screen/quick_reference
 
 
 #######
