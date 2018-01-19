@@ -1,0 +1,3 @@
+sudo su - root -c "cat /home/amund/id_rsa.pub >> /root/.ssh/authorized_keys"
+
+sudo su - root -c "tail -1 /root/.ssh/authorized_keys"
