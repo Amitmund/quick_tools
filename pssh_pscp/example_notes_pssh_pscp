@@ -90,6 +90,11 @@ ip hostname.domain
 ansible -i output_inventory.ini -m ping all
 ansible -i output_inventory.ini -m command -a "uptime" all
 
+### ansible.cfg example ###
+ cat ansible.cfg
+[defaults]
+hostfile = ./inventory.ini
+host_key_checking = False
 
 
 
