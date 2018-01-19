@@ -1,0 +1,96 @@
+ pssh -h /tmp/cassandra -P -l root "iptables -I INPUT -p tcp -s 192.168.74.0/24,192.168.76.0/24 -m multiport --dport 9042,7166 -j REJECT  --reject-with icmp-port-unreachable"
+
+
+trust-store
+pssh -l amund -o /tmp/prod_out/ -h /var/tmp/p3 'sudo su - root -c "echo '<password_here>' | /usr/local/akamai/java64/jdk1.7.0/bin/keytool -list -keystore /usr/local/akamai/java64/jdk1.7.0/jre/lib/security/cacerts|wc -l"'
+
+keystore check:
+psshgwsh -l amund -h /var/tmp/p3PortalTomcat -o /tmp/prod_keytool/ 'sudo su - root -c "openssl pkcs12 -in /path/to/portalssl.p12 -passin pass:<password_over_her> -nodes|wc"'
+
+pssh -i -h host_list_files -l portal "hostname; grep -B1 -i \"INFO: Server startup\" /path/to/catalina.out | tail -4; date"
+
+#
+#pssh -O UserKnownHostsFile=/dev/null -O StrictHostKeyChecking=no -i -H "${IPs}" -l root "${RemoteCommands}"
+pssh -o CommandOutPutDir -O StrictHostKeyChecking=no -i -H "${IPs}" -l root "${Commands}"
+
+
+###
+pscp
+
+#Following is an example for centos, to copy my public file to all the hosts that is there at the given hosts_file
+pscp.pssh -h hosts_file -l amund --askpass /root/.ssh/hohoho.pub /var/tmp/
+
+Warning: do not enter your password if anyone else has superuser
+privileges or access to your account.
+Password:
+
+###
+pssh -h hosts_file -l amund --askpass -o /tmp/pssh_output/ "ls -l /var/tmp/hohoho.pub"
+
+#For cross check:
+grep . /tmp/pssh_output/*
+
+#once you are good with the output, you can clean that folder
+rm -rf /tmp/pssh_output/
+
+# if you want to get the output in the terminal
+ pssh -h hosts_file -l amund --askpass -i "ls -l /var/tmp/hohoho.pub"
+ 
+ ################
+ ### Very IMP ###
+ For testing, just update only one host, then you can use rest all hosts.
+ 
+  pssh -H 10.47.64.108 -l amund --askpass -i 'sudo su - root -c "cat /var/tmp/hohoho.pub >> /root/.ssh/authorized_keys"'
+ 
+ # Now cross check again
+  pssh -H 10.47.64.108 -l amund --askpass -i 'sudo su - root -c "tail -1 /root/.ssh/authorized_keys"'
+  
+# Now verify again
+
+#ssh-add ~/.ssh/hohoho
+Identity added: /root/.ssh/hohoho (/root/.ssh/hohoho)
+# pssh -H 10.47.64.108 -l root -i "tail -1 /root/.ssh/authorized_keys"
+[1] 07:16:22 [SUCCESS] 10.47.64.108
+
+ ################
+ ### Very IMP ###
+# Now you can do for rest of the hosts
+ pssh -h ml2_atr2 -l amund --askpass -i 'sudo su - root -c "cat /var/tmp/hohoho.pub >> /root/.ssh/authorized_keys"'
+
+# Now you can verify with the following 
+pssh -h ml2_atr2 -l root -i "uptime"
+
+
+#### Few quick ansible notes over here ###
+
+####### Ansible notes #######
+# cat inventory_generator
+#!/bin/bash
+cat /dev/null > output_inventory.ini
+while IFS='' read -r line || [[ -n "$line" ]]; do
+
+#       echo "$line"
+        host_ip=$(echo "$line" | awk '{print $1}')
+        hostname=$(echo "$line" | awk '{print $2}' | awk -F"." '{print $1}')
+
+        echo "$hostname ansible_ssh_host=$host_ip ansible_ssh_user=root ansible_ssh_private_key_file=/root/.ssh/hohoho" >> output_inventory.ini
+
+done < "$1"
+
+#####
+
+# command to run to generate the inventory file
+sh inventory_generator all_qa_hosts
+
+####
+# Example of the all_qa_hosts format
+ip hostname.domain
+
+# quick ansible command
+ansible -i output_inventory.ini -m ping all
+ansible -i output_inventory.ini -m command -a "uptime" all
+
+
+
+
+
